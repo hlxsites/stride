@@ -13,14 +13,14 @@
  :root {
   /* colors */
   --color-orange: #EF6100;
-  --color-blue-light: #BAD9EF;
+  --color-blue-light: #B3E4FF;
   --color-blue: #2A72CB;
   --color-blue-dark: #010E42;
   --color-purple: #2127C3;
+  --color-white: #fff;
   --color-gray-light: #f3f3f3;
   --color-gray: #adadad;
   --color-gray-dark: #6E6E6E;
-  --color-white: #fff;
   --color-black: #010E42;
   --link-color: var(--color-purple);
   --link-hover-color: var(--color-purple);
@@ -44,7 +44,7 @@
 
   /* heading sizes */
   --heading-font-size-xxl: 36px;
-  --heading-font-size-xl: 24px;
+  --heading-font-size-xl: 18px;
   --heading-font-size-l: 21px;
   --heading-font-size-m: 20px;
   --heading-font-size-s: 16px;
@@ -52,6 +52,12 @@
 
   /* nav height */
   --nav-height: 70px;
+}
+
+@media (min-width: 800px) {
+  :root {
+    --heading-font-size-xl: 24px;
+  }
 }
 
 /* font fallbacks */
@@ -111,7 +117,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 10px;
   font-family: var(--heading-font-family);
   font-weight: 500;
-  line-height: 1.5rem;
+  line-height: 1.5em;
   scroll-margin: calc(var(--nav-height) + 1em);
 }
 
@@ -174,6 +180,14 @@ pre {
   overflow: scroll;
 }
 
+sup {
+  position: relative;
+  top: -.5em;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
 /* links */
 a:any-link {
   background-image: linear-gradient(currentcolor, currentcolor);
@@ -227,6 +241,7 @@ button.button:hover, button.button:focus  {
 
 .button-container {
   margin-top: 30px;
+  margin-bottom: 0;
 }
 
 /* form elements */
@@ -256,10 +271,14 @@ main .section {
   padding: 50px 20px 10px;
 }
 
+main .section [class*=wrapper] + [class*=wrapper] {
+  padding-top: 80px;
+}
+
 @media (min-width: 800px) {
   main .section {
     padding: 50px 20px;
-  }  
+  }
 }
 
 @media (min-width: 1000px) {
@@ -318,5 +337,13 @@ main .section[data-section-status='initialized'] {
 }
 
 main .section.highlight {
+  padding: 50px 20px;
   background-color: var(--highlight-background-color);
+}
+
+main .section.footnote {
+  color: var(--color-gray-dark);
+  font-size: var(--body-font-size-xs);
+  font-style: italic;
+  line-height: 1.63em;
 }
