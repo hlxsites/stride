@@ -18,7 +18,7 @@
   --color-blue-dark: #010E42;
   --color-purple: #2127C3;
   --color-gray-light: #f3f3f3;
-  --color-gray-light: #adadad;
+  --color-gray: #adadad;
   --color-gray-dark: #6E6E6E;
   --color-white: #fff;
   --color-black: #010E42;
@@ -37,13 +37,14 @@
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
 
   /* body sizes */
+  --body-font-size-l: 18px;
   --body-font-size-m: 16px;
   --body-font-size-s: 14px;
   --body-font-size-xs: 11px;
 
   /* heading sizes */
   --heading-font-size-xxl: 36px;
-  --heading-font-size-xl: 18px;
+  --heading-font-size-xl: 24px;
   --heading-font-size-l: 21px;
   --heading-font-size-m: 20px;
   --heading-font-size-s: 16px;
@@ -51,12 +52,6 @@
 
   /* nav height */
   --nav-height: 70px;
-}
-
-@media (min-width: 800px) {
-  :root {
-    --heading-font-size-xl: 24px; 
-  }
 }
 
 /* font fallbacks */
@@ -196,12 +191,12 @@ a:hover {
 }
 
 /* buttons */
-a.button:any-link, button.button {
+a.button, button.button {
   display: inline-block;
   max-width: 100%;
   padding: 8px 20px;
   background-color: var(--link-color);
-  background: linear-gradient(to left, var(--color-purple) 50%, var(--color-black) 50%);
+  background-image: linear-gradient(to left, var(--color-purple) 50%, var(--color-black) 50%);
   background-size: 200% 100%;
   background-position: right;
   transition: background-position .6s ease;
@@ -216,27 +211,26 @@ a.button:any-link, button.button {
   cursor: pointer;
 }
 
-a.button:hover, a.button:focus, button.button:hover, button.button:focus  {
+a.button.secondary, button.button.secondary {
+  background-color: var(--color-white);
+  background-image: linear-gradient(to left, var(--color-white) 50%, var(--color-blue-light) 50%);
+  background-size: 200% 100%;
+  background-position: right;
+  transition: background-position .6s ease;
+  color: var(--link-color);
+}
+
+a.button:hover, a.button:focus,
+button.button:hover, button.button:focus  {
   background-position: left;
-}
-
-button:disabled, button.button:disabled:hover {
-  background-color: var(--overlay-background-color);
-  cursor: unset;
-}
-
-a.button.secondary, .button.button.secondary {
-  background-color: unset;
-  border: 2px solid currentcolor;
-  color: var(--text-color)
 }
 
 .button-container {
   margin-top: 30px;
 }
 
-/* form elements*/
-main input {
+/* form elements */
+input {
   font-size: 1.25rem;
   width: 100%;
   max-width: 50rem;
@@ -250,8 +244,12 @@ main input {
   background-color: var(--background-color);
 }
 
-main input:hover {
+input:hover {
   border: 1px solid var(--text-color);
+}
+
+button {
+  cursor: pointer;
 }
 
 main .section {
