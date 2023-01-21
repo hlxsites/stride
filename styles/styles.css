@@ -342,8 +342,16 @@ main .section.highlight {
 }
 
 main .section.footnote {
+  padding-top: 30px;
+  padding-bottom: 0;
   color: var(--color-gray-dark);
   font-size: var(--body-font-size-xs);
   font-style: italic;
   line-height: 1.63em;
+}
+
+@media (min-width: 800px) {
+  main .section.footnote {
+    padding-top: 0;
+  }
 }
