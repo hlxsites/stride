@@ -12,44 +12,94 @@
 
  :root {
   /* colors */
-  --link-color: #035fe6;
-  --link-hover-color: #136ff6;
-  --background-color: #fff;
-  --overlay-background-color: #eee;
-  --highlight-background-color: #ccc;
-  --text-color: #000;
+  --color-orange: #EF6100;
+  --color-blue-light: #BAD9EF;
+  --color-blue: #2A72CB;
+  --color-blue-dark: #010E42;
+  --color-purple: #2127C3;
+  --color-gray-light: #f3f3f3;
+  --color-gray-light: #adadad;
+  --color-gray-dark: #6E6E6E;
+  --color-white: #fff;
+  --color-black: #010E42;
+  --link-color: var(--color-purple);
+  --link-hover-color: var(--color-purple);
+  --background-color: var(--color-white);
+  --overlay-background-color: var(--color-gray-light);
+  --highlight-background-color: var(--color-blue-light);
+  --text-color: var(--color-black);
 
   /* fonts */
-  --body-font-family: 'helvetica neue', helvetica, ubuntu, roboto, noto, sans-serif;
-  --heading-font-family: var(--body-font-family);
+  --body-font-family: 'ABC Monument Grotesk Regular', 'Monument Grotesk Regular fallback', sans-serif;
+  --medium-font-family: 'ABC Monument Grotesk Medium', 'Monument Grotesk Medium fallback', sans-serif;
+  --bold-font-family: 'ABC Monument Grotesk Bold', 'Monument Grotesk Bold fallback', sans-serif;
+  --heading-font-family: 'Monument Extended Bold', 'Monument Extended fallback', sans-serif;
   --fixed-font-family: 'Roboto Mono', menlo, consolas, 'Liberation Mono', monospace;
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 18px;
-  --body-font-size-xs: 16px;
+  --body-font-size-m: 16px;
+  --body-font-size-s: 14px;
+  --body-font-size-xs: 11px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 48px;
-  --heading-font-size-xl: 40px;
-  --heading-font-size-l: 32px;
-  --heading-font-size-m: 24px;
-  --heading-font-size-s: 20px;
-  --heading-font-size-xs: 18px;
+  --heading-font-size-xxl: 36px;
+  --heading-font-size-xl: 18px;
+  --heading-font-size-l: 21px;
+  --heading-font-size-m: 20px;
+  --heading-font-size-s: 16px;
+  --heading-font-size-xs: 12px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 70px;
+}
 
+@media (min-width: 800px) {
+  :root {
+    --heading-font-size-xl: 24px; 
+  }
+}
+
+/* font fallbacks */
+@font-face {
+  font-family: 'Monument Extended fallback';
+  size-adjust: 169.841%;
+  src: local('Arial');
+}
+
+@font-face {
+  font-family: 'Monument Grotesk Regular fallback';
+  size-adjust: 97.3%;
+  src: local('Arial');
+}
+
+@font-face {
+  font-family: 'Monument Grotesk Medium fallback';
+  size-adjust: 98.97%;
+  src: local('Arial');
+}
+
+/* @font-face {
+  font-family: 'Monument Grotesk Bold fallback';
+  size-adjust: 97.3%;
+  src: local('Arial');
+} */
+
+/* minimal reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font: inherit;
 }
 
 body {
-  font-size: var(--body-font-size-m);
-  margin: 0;
-  font-family: var(--body-font-family);
-  line-height: 1.6;
-  color: var(--text-color);
-  background-color: var(--background-color);
   display: none;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 1.625em;
 }
 
 body.appear {
@@ -60,36 +110,60 @@ header {
   height: var(--nav-height);
 }
 
-h1, h2, h3,
-h4, h5, h6 {
+/* headings */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
-  margin-top: 1em;
-  margin-bottom: .5em;
+  font-weight: 500;
+  line-height: 1.5rem;
   scroll-margin: calc(var(--nav-height) + 1em);
 }
 
-h1 { font-size: var(--heading-font-size-xxl) }
-h2 { font-size: var(--heading-font-size-xl) }
-h3 { font-size: var(--heading-font-size-l) }
-h4 { font-size: var(--heading-font-size-m) }
-h5 { font-size: var(--heading-font-size-s) }
-h6 { font-size: var(--heading-font-size-xs) }
+h1 {
+  margin-top: 20px;
+  font-size: var(--heading-font-size-xxl);
+  line-height: 1.1em;
+}
 
+h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: var(--heading-font-size-xl);
+}
+
+h3 {
+  color: var(--color-purple);
+  font-family: var(--bold-font-family);
+  font-size: var(--heading-font-size-l);
+}
+
+h4 {
+  color: var(--color-blue);
+  font-family: var(--medium-font-family);
+  font-size: var(--heading-font-size-m);
+  font-weight: 400;
+}
+
+h5 {
+  font-family: var(--medium-font-family);
+  font-size: var(--heading-font-size-m);
+  font-weight: 400;
+}
+
+h6 {
+  font-size: var(--heading-font-size-m);
+  line-height: 1.1em;
+}
+
+/* text */
 p, dl, ol, ul, pre, blockquote {
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin: 0 0 10px;
 }
 
-a:any-link {
-  color: var(--link-color);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: var(--link-hover-color);
+strong {
+  font-family: var(--bold-font-family);
+  font-weight: 500;
 }
 
 code, pre, samp {
@@ -105,45 +179,63 @@ pre {
   overflow: scroll;
 }
 
-/* buttons */
-
-a.button:any-link, button {
-  font-family: var(--body-font-family);
-  display: inline-block;
-  box-sizing: border-box;
+/* links */
+a:any-link {
+  background-image: linear-gradient(currentcolor, currentcolor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 2px;
+  transition: background-size .5s;
+  color: var(--link-color);
   text-decoration: none;
-  border: 2px solid transparent;
-  padding: 5px 30px;
-  text-align: center;
-  font-style: normal; 
-  font-weight: 600;
-  cursor: pointer;
-  color: var(--background-color);
+  word-break: break-word;
+}
+
+a:hover {
+  background-size: 100% 2px;
+}
+
+/* buttons */
+a.button:any-link, button.button {
+  display: inline-block;
+  max-width: 100%;
+  padding: 8px 20px;
   background-color: var(--link-color);
-  margin: 16px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  border-radius: 30px;
-}
-
-a.button:hover, a.button:focus, button:hover, button:focus  {
-  background-color: var(--link-hover-color);
+  background: linear-gradient(to left, var(--color-purple) 50%, var(--color-black) 50%);
+  background-size: 200% 100%;
+  background-position: right;
+  transition: background-position .6s ease;
+  color: var(--background-color);
+  font-family: var(--medium-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: .125px;
+  line-height: 1.5em;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
 }
 
-button:disabled, button:disabled:hover {
+a.button:hover, a.button:focus, button.button:hover, button.button:focus  {
+  background-position: left;
+}
+
+button:disabled, button.button:disabled:hover {
   background-color: var(--overlay-background-color);
   cursor: unset;
 }
 
-a.button.secondary, button.secondary {
+a.button.secondary, .button.button.secondary {
   background-color: unset;
   border: 2px solid currentcolor;
   color: var(--text-color)
-} 
+}
 
+.button-container {
+  margin-top: 30px;
+}
 
+/* form elements*/
 main input {
   font-size: 1.25rem;
   width: 100%;
@@ -163,7 +255,24 @@ main input:hover {
 }
 
 main .section {
-  padding: 64px 16px;
+  padding: 50px 20px 10px;
+}
+
+@media (min-width: 800px) {
+  main .section {
+    padding: 50px 20px;
+  }  
+}
+
+@media (min-width: 1000px) {
+  main .section {
+    padding: 80px 20px;
+  }  
+
+  main .section > div {
+    max-width: 1200px;
+    margin: auto;
+  }
 }
 
 main pre {
@@ -202,28 +311,6 @@ main img {
   max-width: 100%;
   width: auto;
   height: auto;
-}
-
-@media (min-width: 600px) {
-  main .section {
-    padding: 64px 32px;
-  }  
-}
-
-@media (min-width: 900px) {
-  :root {
-    --heading-font-size-xxl: 60px;
-    --heading-font-size-xl: 48px;
-    --heading-font-size-l: 36px;
-    --heading-font-size-m: 30px;
-    --heading-font-size-s: 24px;
-    --heading-font-size-xs: 22px;  
-  }
-  
-  .section > div {
-    max-width: 1200px;
-    margin: auto;
-  }
 }
 
 /* progressive section appearance */
