@@ -1,0 +1,68 @@
+.stats > div {
+  display: grid;
+  gap: 40px;
+  max-width: 100%;
+}
+
+.stats p {
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+}
+
+.stats .stat-title {
+  border-left: 30px solid var(--color-orange);
+  padding: 15px 0 0 20px;
+  color: var(--color-blue);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xxl);
+  line-height: 1.42;
+}
+
+@media (min-width: 800px) {
+  .stats > div {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px min(10%, 40px);
+    padding: 0 5%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .stats > div {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px min(2%, 40px);
+    align-items: end;
+    padding: 0;
+  }
+
+  .stats > div > div {
+    cursor: pointer;
+  }
+
+  .stats .stat-title {
+    border-color: var(--color-gray);
+    color: var(--color-gray-dark);
+  }
+
+  .stats .stat-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .8s linear;
+    transition-delay: .4s;
+  }
+
+  .stats [data-active=true] .stat-title {
+    border-color: var(--color-orange);
+    color: var(--color-blue);
+  }
+
+  .stats [data-active=true] .stat-content {
+    max-height: 100px;
+    transition: max-height .2s linear;
+  }
+}
+
+@media (min-width: 1200px) {
+  .stats > div {
+    padding: 0 2%;
+  }
+}
