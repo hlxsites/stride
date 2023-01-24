@@ -197,6 +197,40 @@ export function decorateBlock(block) {
 }
 
 /**
+ * Turns absolute links within the domain into relative links
+ * and adds icons/labels to links that open in a new window.
+ * @param {Element} main The container element
+ */
+export function decorateLinks(main) {
+  // eslint-disable-next-line no-use-before-define
+  const hosts = ['hlx.page', 'hlx.live', 'stridelearning.com', window.location.hostname];
+  main.querySelectorAll('a').forEach((a) => {
+    if (a.href) {
+      try {
+        const url = new URL(a.href);
+        const hostMatch = hosts.some((host) => url.hostname.includes(host));
+        const openBlank = url.hash.toLowerCase() === '#blank';
+        if (hostMatch) {
+          a.href = a.href.replace(url.host, window.location.host);
+        }
+        if (!hostMatch || openBlank) {
+          const icon = document.createElement('span');
+          icon.className = 'icon icon-external';
+          a.append(icon);
+          decorateIcons(a);
+          a.setAttribute('target', '_blank');
+          a.setAttribute('aria-label', `${a.textContent} opens in a new window`);
+          if (openBlank) a.href = a.href.replace(url.hash, '');
+        }
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log(e);
+      }
+    }
+  });
+}
+
+/**
  * Extracts the config from a block.
  * @param {Element} block The block element
  * @returns {object} The block config
@@ -252,14 +286,16 @@ export function decorateSections(main) {
         const wrapper = document.createElement('div');
         wrappers.push(wrapper);
         defaultContent = e.tagName !== 'DIV';
-        if (defaultContent) wrapper.classList.add('default-content-wrapper');
+        if (defaultContent) {
+          wrapper.classList.add('default-content-wrapper');
+          decorateLinks(wrapper);
+        }
       }
       wrappers[wrappers.length - 1].append(e);
     });
     wrappers.forEach((wrapper) => section.append(wrapper));
     section.classList.add('section');
     section.setAttribute('data-section-status', 'initialized');
-
     /* process section metadata */
     const sectionMeta = section.querySelector('div.section-metadata');
     if (sectionMeta) {
@@ -367,6 +403,7 @@ export async function loadBlock(block) {
         })();
       });
       await Promise.all([cssLoaded, decorationComplete]);
+      decorateLinks(block);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(`failed to load block ${blockName}`, error);
