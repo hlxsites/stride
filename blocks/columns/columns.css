@@ -42,6 +42,7 @@
 }
 
 /* variants */
+/* stylelint-disable-next-line no-descending-specificity */
 .columns.contain img {
   height: unset;
   object-fit: unset;
@@ -53,7 +54,7 @@
 }
 
 .columns.light {
-  background-color: var(--color-gray-light);
+  background-color: var(--color-gray-lighter);
 }
 
 .columns.dark h2 {
