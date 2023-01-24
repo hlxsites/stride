@@ -1,7 +1,7 @@
 import { readBlockConfig, decorateIcons } from '../../scripts/lib-franklin.js';
 
 // media query match that indicates mobile/tablet width
-const MQ = window.matchMedia('(min-width: 900px)');
+const MQ = window.matchMedia('(min-width: 1000px)');
 
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
@@ -57,7 +57,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || MQ.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || MQ.matches ? 'false' : 'true');
+  toggleAllNavSections(navSections, expanded ? 'true' : 'false');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
@@ -105,23 +105,71 @@ export default async function decorate(block) {
     nav.id = 'nav';
     nav.innerHTML = html;
 
-    const classes = ['brand', 'sections', 'tools'];
+    const classes = ['brand', 'tools', 'list', 'sections'];
     classes.forEach((c, i) => {
       const section = nav.children[i];
       if (section) section.classList.add(`nav-${c}`);
     });
 
+    const navBrand = nav.querySelector('.nav-brand');
+    if (navBrand) {
+      const logo = navBrand.querySelector('picture, span.icon');
+      // wrap logo in link
+      if (logo && logo.parentElement.nodeName !== 'A') {
+        const a = document.createElement('a');
+        a.href = window.location.origin;
+        a.innerHTML = logo.outerHTML;
+        logo.replaceWith(a);
+      }
+    }
+
     const navSections = nav.querySelector('.nav-sections');
     if (navSections) {
       navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
-        if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-        navSection.addEventListener('click', () => {
-          if (MQ.matches) {
+        if (navSection.querySelector('ul')) {
+          navSection.classList.add('nav-drop');
+          navSection.addEventListener('click', () => {
             const expanded = navSection.getAttribute('aria-expanded') === 'true';
             toggleAllNavSections(navSections);
             navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+          });
+          navSection.addEventListener('mouseenter', () => {
+            const expanded = navSection.getAttribute('aria-expanded') === 'true';
+            if (!expanded) {
+              toggleAllNavSections(navSections);
+              navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+            }
+          });
+          // rewrite special nav drops
+          const drop = navSection.querySelector('ul');
+          const submenu = drop.querySelector('strong');
+          if (submenu) {
+            const parent = submenu.closest('li');
+            const a = parent.querySelector('a');
+            const title = navSection.textContent.split('\n')[0].trim();
+            const text = submenu.textContent;
+            parent.innerHTML = '';
+            parent.classList.add('nav-drop-expanded');
+            // write mobile view
+            const mobileView = document.createElement('div');
+            mobileView.className = 'nav-drop-mobile';
+            mobileView.innerHTML = `<a href="${a.href}">Go to ${title}</a>`;
+            parent.append(mobileView);
+            // write desktop view
+            const desktopView = document.createElement('div');
+            desktopView.className = 'nav-drop-desktop';
+            desktopView.innerHTML = `<p>${text}</p>
+              <p class="button-container">
+                <a class="button primary" href="${a.href}">${title}</a>
+              </p>`;
+            parent.append(desktopView);
+            // wrap siblings
+            const siblings = [...drop.querySelectorAll('li')].filter((li) => li !== parent);
+            const wrapper = document.createElement('div');
+            wrapper.append(...siblings);
+            drop.append(wrapper);
           }
-        });
+        }
       });
     }
 
