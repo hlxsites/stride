@@ -211,7 +211,7 @@ export function decorateLinks(main) {
         const hostMatch = hosts.some((host) => url.hostname.includes(host));
         const openBlank = url.hash.toLowerCase() === '#blank';
         if (hostMatch) {
-          a.href = a.href.replace(url.host, window.location.host);
+          a.href = a.href.replace(url.host, window.location.host).replace('.html', '');
         }
         if (!hostMatch || openBlank) {
           const icon = document.createElement('span');
