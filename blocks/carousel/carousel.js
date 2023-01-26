@@ -32,6 +32,7 @@ export default async function decorate(block) {
     });
     // create slide button
     const button = document.createElement('button');
+    button.setAttribute('aria-label', `Slide ${i + 1}`);
     if (!i) button.classList.add('selected');
     button.addEventListener('click', () => {
       block.scrollTo({

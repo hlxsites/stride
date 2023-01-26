@@ -15,6 +15,7 @@ function wrapImgsInLinks(container) {
     if (link && link.textContent.includes(link.getAttribute('href'))) {
       link.parentElement.remove();
       link.innerHTML = pic.outerHTML;
+      link.setAttribute('aria-label', pic.querySelector('img').getAttribute('alt') || link.host);
       parent.replaceWith(link);
     }
   });

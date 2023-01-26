@@ -119,6 +119,7 @@ export default async function decorate(block) {
         const a = document.createElement('a');
         a.href = window.location.origin;
         a.innerHTML = logo.outerHTML;
+        a.setAttribute('aria-label', 'Stride home page');
         logo.replaceWith(a);
       }
     }
