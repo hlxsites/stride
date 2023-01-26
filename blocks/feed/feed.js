@@ -26,7 +26,7 @@ export default async function decorate(block) {
     const img = document.createElement('div');
     img.className = 'feed-card-image';
     img.innerHTML = `<picture>
-        <img src="${page.image}" alt="${page.title}" />
+        <img loading="lazy" src="${page.image}" alt="${page.title}" />
       </picture>`;
     // setup card body
     const body = document.createElement('div');
