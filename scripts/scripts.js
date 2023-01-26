@@ -33,6 +33,7 @@ function buildAccordionColumns(main) {
     // build wrapping columns block
     const container = document.createElement('div');
     container.className = 'section columns-container';
+    container.setAttribute('data-section-status', 'initialized');
     const containerWrap = document.createElement('div');
     containerWrap.className = 'columns-wrapper';
     container.append(containerWrap);
