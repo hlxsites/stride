@@ -1,0 +1,121 @@
+.feed > ul {
+  list-style: none;
+  display: grid;
+  gap: 30px;
+  padding: 20px;
+}
+
+@media (min-width: 800px) {
+  .feed > ul {
+    grid-template-columns: 1fr 1fr;
+    gap: 3%;
+    padding: 1.5%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .feed > ul {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.feed > ul > li {
+  position: relative;
+  background-color: var(--overlay-background-color);
+  box-shadow: 0 4px 8px var(--color-gray-darkest-shadow);
+}
+
+.feed > ul > li a::before,
+.feed > ul > li a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 2px solid transparent;
+  transition: width .3s, height .3s, border .3s;
+}
+
+.feed > ul > li a::before {
+  top: 0;
+  right: 0;
+}
+
+.feed > ul > li a::after {
+  bottom: 0;
+  left: 0;
+}
+
+.feed > ul > li a:hover::before,
+.feed > ul > li a:hover::after {
+  width: 100%;
+  height: 100%;
+}
+
+.feed > ul > li a:hover::before {
+  border-top: 2px solid var(--link-color);
+  border-right: 2px solid var(--link-color);
+}
+
+.feed > ul > li a:hover::after {
+  border-bottom: 2px solid var(--link-color);
+  border-left: 2px solid var(--link-color);
+}
+
+/* feed card image */
+.feed .feed-card-image {
+  line-height: 0;
+}
+
+.feed > ul > li img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+/* feed card body */
+.feed .feed-card-body {
+  position: relative;
+  padding: 25px 25px 85px;
+  line-height: 1.5;
+}
+
+.feed .feed-byline {
+  color: var(--color-gray);
+  font-size: var(--body-font-size-s);
+  letter-spacing: .75px;
+}
+
+.feed .feed-byline a {
+  text-decoration: underline;
+  text-transform: uppercase;
+}
+
+.feed .feed-byline a:hover,
+.feed .feed-byline a:focus {
+  background-size: 0;
+}
+
+.feed .feed-byline .feed-date::before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  height: 1em;
+  margin-left: .25ch;
+  border-left: 1.5px solid;
+  padding-left: .5ch;
+}
+
+.feed .feed-title {
+  margin: 15px 0 20px;
+  color: var(--text-color);
+  font-family: var(--bold-font-family);
+  font-size: var(--body-font-size-l);
+}
+
+.feed .feed-button {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  padding-top: 25px;
+  text-transform: uppercase;
+}
