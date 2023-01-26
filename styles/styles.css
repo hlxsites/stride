@@ -24,6 +24,8 @@
   --color-gray: #adadad;
   --color-gray-dark: #6E6E6E;
   --color-gray-darker: #595959;
+  --color-gray-darkest: #262626;
+  --color-gray-darkest-shadow: #26262633;
   --color-black: #010E42;
   --link-color: var(--color-purple);
   --link-hover-color: var(--color-purple);
@@ -281,7 +283,7 @@ main .section {
   padding: 50px 20px 10px;
 }
 
-main .section [class*=wrapper]:not(.default-content-wrapper) + [class*=wrapper]:not(.default-content-wrapper) {
+main .section [class*=wrapper] + [class*=wrapper] {
   padding-top: 80px;
 }
 
@@ -300,6 +302,10 @@ main .section [class*=wrapper]:not(.default-content-wrapper) + [class*=wrapper]:
     max-width: 1200px;
     margin: auto;
   }
+}
+
+main .section > [data-wrapper="default-content"] h2 {
+  text-align: center;
 }
 
 main pre {
