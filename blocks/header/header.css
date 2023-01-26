@@ -10,6 +10,12 @@ header .header {
   background-image: linear-gradient(var(--color-purple) 70px, var(--background-color) 70px);
 }
 
+@media (min-width: 1000px) {
+  header .header {
+    box-shadow: 0 4px 8px 0 var(--shadow-color-light);
+  }
+}
+
 header nav {
   display: grid;
   grid-template:

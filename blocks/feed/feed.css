@@ -22,7 +22,7 @@
 .feed > ul > li {
   position: relative;
   background-color: var(--overlay-background-color);
-  box-shadow: 0 4px 8px var(--color-gray-darkest-shadow);
+  box-shadow: 0 4px 8px var(--shadow-color-dark);
 }
 
 .feed > ul > li a::before,

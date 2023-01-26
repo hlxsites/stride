@@ -25,8 +25,9 @@
   --color-gray-dark: #6E6E6E;
   --color-gray-darker: #595959;
   --color-gray-darkest: #262626;
-  --color-gray-darkest-shadow: #26262633;
   --color-black: #010E42;
+  --shadow-color-light: #7c7c7c26;
+  --shadow-color-dark: #26262633;
   --link-color: var(--color-purple);
   --link-hover-color: var(--color-purple);
   --background-color: var(--color-white);
@@ -121,6 +122,8 @@ body.appear {
 
 header {
   height: var(--nav-height);
+  background-color: var(--color-purple);
+  background-image: linear-gradient(var(--color-purple) 70px, var(--background-color) 70px);
 }
 
 /* headings */
