@@ -17,11 +17,25 @@ export default function decorate(block) {
   });
 
   // setup variants
-  if ([...block.classList].includes('dark')) {
+  const variants = [...block.classList];
+  if (variants.includes('dark')) {
     const buttons = block.querySelectorAll('.button');
     buttons.forEach((button) => {
       button.classList.remove('primary');
       button.classList.add('secondary');
+    });
+  }
+
+  if (variants.includes('multi-img')) {
+    const imgCols = block.querySelectorAll('.columns-img-col');
+    imgCols.forEach((imgCol) => {
+      // unwrap pictures
+      const pics = imgCol.querySelectorAll('picture');
+      imgCol.innerHTML = '';
+      pics.forEach((pic, i) => {
+        imgCol.append(pic);
+        if (!i) pic.classList.add('expanded');
+      });
     });
   }
 }

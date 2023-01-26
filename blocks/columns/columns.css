@@ -71,9 +71,23 @@
   padding: 25px;
 }
 
+.columns.multi-img > div > .columns-img-col {
+  order: 1;
+  display: flex;
+}
+
+.columns.multi-img .columns-img-col picture {
+  flex: 1;
+  transition: flex .6s;
+}
+
 @media (min-width: 800px) {
   .columns.contain > div > .columns-img-col {
     flex: 1;
+  }
+ 
+  .columns.multi-img .columns-img-col picture.expanded {
+    flex: 3;
   }
 
   .columns.dark > div > div:not([class]),
