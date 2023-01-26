@@ -90,12 +90,13 @@ footer .footer .footer-brand a:focus {
 
 @media (min-width: 800px) {
   footer .footer .brand-wrapper {
-    padding: 40px 15px 30px;
+    padding: 0;
   }
-
+  
   footer .footer .footer-brand {
     max-width: 1200px;
     margin: auto;
+    padding: 40px 15px 30px;
   }
 
   footer .footer .footer-brand img {
