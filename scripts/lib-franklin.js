@@ -287,7 +287,7 @@ export function decorateSections(main) {
         wrappers.push(wrapper);
         defaultContent = e.tagName !== 'DIV';
         if (defaultContent) {
-          wrapper.classList.add('default-content-wrapper');
+          wrapper.setAttribute('data-wrapper', 'default-content');
           decorateLinks(wrapper);
         }
       }
@@ -340,7 +340,7 @@ export function updateSectionsStatus(main) {
  */
 export function decorateBlocks(main) {
   main
-    .querySelectorAll('div.section > div > div')
+    .querySelectorAll('div.section > div div[class]')
     .forEach(decorateBlock);
 }
 
