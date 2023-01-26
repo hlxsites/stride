@@ -23,13 +23,13 @@ export default async function decorate(block) {
   const wrapper = document.createElement('ul');
   pages.forEach((page) => {
     // setup card image
-    const img = document.createElement('li');
+    const img = document.createElement('div');
     img.className = 'feed-card-image';
     img.innerHTML = `<picture>
         <img src="${page.image}" alt="${page.title}" />
       </picture>`;
     // setup card body
-    const body = document.createElement('li');
+    const body = document.createElement('div');
     body.className = 'feed-card-body';
     body.innerHTML = `<p class="feed-byline">
         <a class="feed-category" href="${page.path}">${page.category}</a>
