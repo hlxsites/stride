@@ -27,6 +27,47 @@ function buildHeroBlock(main) {
   }
 }
 
+function buildAccordionColumns(main) {
+  const section = main.querySelector('.accordion-columns');
+  if (section) {
+    // build wrapping columns block
+    const container = document.createElement('div');
+    container.className = 'section columns-container';
+    const containerWrap = document.createElement('div');
+    containerWrap.className = 'columns-wrapper';
+    container.append(containerWrap);
+    const text = document.createElement('div');
+    const img = [];
+    [...section.children].forEach((wrapper) => {
+      [...wrapper.children].forEach((child) => {
+        if (child.className && child.className !== 'button-container') {
+          container.classList.add(`${child.className}-container`);
+        }
+        if (child.querySelector('picture')) {
+          img.push(child);
+        }
+      });
+      text.append(wrapper);
+    });
+    const columns = buildBlock('columns', [[text, ...img]]);
+    columns.classList.add('light', 'multi-img');
+    containerWrap.append(columns);
+    section.replaceWith(container);
+    // link accordion behavior
+    const accordion = container.querySelector('.accordion');
+    const pictures = container.querySelectorAll('picture');
+    [...accordion.children].forEach((a, i) => {
+      a.addEventListener('click', () => {
+        const expanded = pictures[i].className === 'expanded';
+        if (!expanded) {
+          pictures.forEach((pic) => pic.classList.remove('expanded'));
+          pictures[i].classList.add('expanded');
+        }
+      });
+    });
+  }
+}
+
 /**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
@@ -51,6 +92,7 @@ export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  buildAccordionColumns(main);
   decorateBlocks(main);
 }
 
